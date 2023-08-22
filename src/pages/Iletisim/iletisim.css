@@ -1,0 +1,45 @@
+/* iletisim.css */
+
+.map-section {
+    background-color: #f0f0f0;
+    padding: 40px 0;
+  }
+  
+  .map-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .map-frame {
+    width: 100%;
+    height: 600px;
+    border: none;
+  }
+  
+  .map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .map-address,
+  .map-contact-info {
+    margin: 10px;
+    text-align: center;
+  }
+  
+  .map-contact-info a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  /* ...Geri bildirim formu stilleri ve diğer stiller burada olabilir */
+  

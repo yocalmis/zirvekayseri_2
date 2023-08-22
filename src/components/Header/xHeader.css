@@ -1,0 +1,79 @@
+.container-fluid {
+  margin: 2px; /* Dış border'dan içeri boşluk vermek için */
+}
+
+.carousel-item {
+  text-align: center; /* Görselleri yatayda ortalamak için */
+}
+
+.carousel-caption {
+  background: rgba(
+    0,
+    0,
+    0,
+    0.7
+  ); /* Alt yazı için bir arka plan oluşturmak için */
+  padding: 10px;
+  color: white;
+}
+.parasutLink {
+  padding: 16px 20px 16px 20px !important;
+  font-weight: 500;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  margin: auto !important;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  -webkit-transition: background-color 250ms ease-in, color 250ms ease-in;
+  -o-transition: background-color 250ms ease-in, color 250ms ease-in;
+  transition: background-color 250ms ease-in, color 250ms ease-in;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+.parasutLink:hover {
+  background-color: #eb230d;
+  color: white;
+}
+
+.novaLink {
+  padding: 16px 24px;
+  font-weight: 500;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  margin: auto !important;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  -webkit-transition: background-color 250ms ease-in, color 250ms ease-in;
+  -o-transition: background-color 250ms ease-in, color 250ms ease-in;
+  transition: background-color 250ms ease-in, color 250ms ease-in;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+.novatLink:hover {
+  background-color: #3c74f6;
+  color: white;
+}
+.textshadows {
+  text-shadow: 2px 1px 3px #000000;
+}
+
+@media (max-width: 767px) {
+  .button-container {
+    display: none;
+    flex-wrap: wrap;
+  }
+}
