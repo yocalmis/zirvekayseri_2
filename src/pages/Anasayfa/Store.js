@@ -27,6 +27,7 @@ class Store {
   kampanya = [];
   etkinlik = [];
   referans = [];
+  personel = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -132,6 +133,20 @@ dec: action
 
       runInAction(() => {
         this.referans = resp.data;
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  personelGetir = async () => {
+    const baseURL = "https://www.zirvekayseri.com/api/personel";
+    try {
+      const resp = await axios.get(baseURL);
+      //	  console.log(resp.data);
+
+      runInAction(() => {
+        this.personel = resp.data;
       });
     } catch (err) {
       console.error(err);

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Carousel1 from "../../images/Coursel/Carousel1.png";
 import Carousel2 from "../../images/Coursel/Carousel2.png";
-import Carousel3 from "../../images/Coursel/Carousel3.png";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
 import { observer } from "mobx-react-lite";

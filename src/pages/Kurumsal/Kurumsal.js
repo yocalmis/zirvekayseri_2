@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useEffect } from "react";
 import XTopbar from "../../components/Topbar/xTopbar";
 import ANavbar from "../../components/Navbar/aNavbar";
 import Carousel from "react-bootstrap/Carousel";
@@ -7,6 +6,11 @@ import Transition1 from "../../images/Transition/c14.png";
 import Transition2 from "../../images/Transition/c15.png";
 import Transition3 from "../../images/Transition/c16.png";
 import Footer from "../../components/Footer/Footer";
+import { observer } from "mobx-react-lite";
+import parse from "html-react-parser";
+import Store from "../Anasayfa/Store";
+
+const Data = new Store();
 
 function TeamMember({ name, role, image, mail, phone }) {
   return (
@@ -18,15 +22,15 @@ function TeamMember({ name, role, image, mail, phone }) {
           src={image}
         />
         <div className="w-full">
-          <h2 className="title-font font-medium text-lg text-gray-900">
+          <h2 className="text-gray-500 title-font font-medium text-lg">
             {name}
           </h2>
           <h3 className="text-gray-500 font-medium text-lg">{role}</h3>
-          <a className="mb-2" href={"tel:" + phone}>
+          <a className="mb-2 text-black" href={"tel:" + phone}>
             {phone}
           </a>
           <br />
-          <a className="mb-4" href={"mailto:" + mail}>
+          <a className="mb-4 text-black" href={"mailto:" + mail}>
             {mail}
           </a>
         </div>
@@ -35,59 +39,19 @@ function TeamMember({ name, role, image, mail, phone }) {
   );
 }
 
-function Kurumsal() {
-  const teamMembers = [
-    {
-      name: "Tayyar Baysal",
-      role: "Firma Sorumlusu",
-      image: "https://dummyimage.com/200x200",
-      mail: "tayyar@zirvekayseri.com",
-      phone: "-",
-    },
-    {
-      name: "Mehmet Aydın",
-      role: "Satış-Eğitim-Destek-Donanım Uzmanı",
-      image: "https://dummyimage.com/201x201",
-      mail: "mehmet@zirvekayseri.com",
-      phone: "+905549360566",
-    },
-    {
-      name: "Yusuf Öcalmış",
-      role: "Yazılım Ve Veritabanı Uzmanı",
-      image: "https://dummyimage.com/202x202",
-      mail: "yusuf@zirvekayseri.com",
-      phone: "-",
-    },
-    {
-      name: "Orhan Kahraman",
-      role: "Satış-Eğitim-Destek Uzmanış",
-      image: "https://dummyimage.com/203x203",
-      mail: "orhan@zirvekayseri.com",
-      phone: "+905543456063",
-    },
-    {
-      name: "Ahmet Yüceler",
-      role: "Front End Developer - Yazılım Destek Uzmanı",
-      image: "https://dummyimage.com/203x203",
-      mail: "ahmet@zirvekayseri.com",
-      phone: "-",
-    },
-    {
-      name: "Abdulkadir Aslantaş",
-      role: "Satış-Eğitim-Destek Uzmanı",
-      image: "https://dummyimage.com/203x203",
-      mail: "abdulkadir@zirvekayseri.com",
-      phone: "+905542148366",
-    },
-    {
-      name: "Burak Zorlu",
-      role: "Satış-Eğitim-Destek Uzmanı",
-      image: "https://dummyimage.com/203x203",
-      mail: "burak@zirvekayseri.com",
-      phone: "+905545700320",
-    },
-  ];
+const Kurumsal = observer(() => {
+  useEffect(() => {
+    Data.bilgiGetir();
+    Data.personelGetir();
+  }, []);
 
+  const teamMembers = Data.personel && Data.personel.slice(0, 8).map((p1, i) => ({
+    name: p1.adi,
+    role: p1.pozisyon,
+    image: "https://dummyimage.com/200x200",
+    mail: p1.email,
+    phone: p1.telefon,
+  }));
   return (
     <>
       <XTopbar />
@@ -159,8 +123,10 @@ function Kurumsal() {
                 </div>
                 <div className="flex-grow pl-6">
                   <h2 className="text-gray-900 text-lg title-font font-medium mb-2">Hakkımızda :</h2>
-                  <p className="leading-relaxed text-base">2000-2006 yılları arasında değişik adlarda faaliyette olan firmamız 2006 yılında ortaklıklardan ayrılıp şahıs firması olarak ticari hayata merhaba diyen Zirve Bilgisayar & Yazılım,2012 yılında Zirve yazılım LTD. ŞTİ.olarak, bilgisayar ve bilgisayar parçaları satışı (oem ürünler), teknik destek , servis, web tasarımı, bakım hizmetleri ile birlikte teknolojik gelişmeler ile ilgili danışmanlık hizmetleri vermektedir. İşletmemiz dürüst hizmet ve satış politikası ile uzun vadede yatırımlarla yapısını ve portföyünü geliştirme çalışmaları içerisindedir.</p>
-                </div>
+                  {Data.bilgi &&
+                Data.bilgi.slice(0, 1).map((h1, i) => (
+                  <p className="leading-relaxed text-base">{parse(h1.hakkimizda)}</p>
+                  ))} </div> 
               </div>
               <div className="p-4 md:w-1/2 flex">
                 <div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-500 mb-4 flex-shrink-0">
@@ -172,17 +138,19 @@ function Kurumsal() {
                 </div>
                 <div className="flex-grow pl-6">
                   <h2 className="text-gray-900 text-lg title-font font-medium mb-2">Misyonumuz :</h2>
-                  <p className="leading-relaxed text-base">Dürüst ve kaliteli hizmet odaklı çalışma prensibi, müşteri memnuniyeti odaklı hizmetleri ile en son teknolojileri müşterilerinin kullanımına sunma hedefi ile gündelik hayatı teknolojik gelişmeler ile daha da kolay hale getirmektir.</p>
-                </div>
+                  {Data.bilgi &&
+                Data.bilgi.slice(0, 1).map((h1, i) => (
+                  <p className="leading-relaxed text-base">{parse(h1.hakkimizda)}</p>
+                  ))}</div>
               </div>
             </div>
           </div>
         </section>
           </div>
         </section>
-        <h1 className="text-center text-black hover:text-">TAKIM ÜYELERİ</h1>
+        <h1 className="text-center text-black">TAKIM ÜYELERİ</h1>
         <br />
-        <div className="row">
+        <div className="row text-black">
           {teamMembers.map((member, index) => (
             <TeamMember key={index} {...member} />
           ))}
@@ -190,7 +158,7 @@ function Kurumsal() {
       </div>
       <Footer/>
     </>
-  );
-}
+  ); 
+});
 
 export default Kurumsal;
