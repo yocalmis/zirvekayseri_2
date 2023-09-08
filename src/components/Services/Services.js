@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from "react-router-dom";
 function Services() {
   return (
     <section className="text-gray-600 body-font">
@@ -8,7 +8,7 @@ function Services() {
               <div className="w-75 h-full bg-blue-500"></div>
             </div>
         <div className="flex flex-col text-center w-full mb-3">
-          <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Ürünlerimiz</h1>
+         <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Ürünlerimiz</h1>
           <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Zirve ürünleri ile, işletmenizin ön muhasebe süreçlerini kolayca yönetin, zamandan ve iş gücünden tasarruf edin.</p>
         </div>
         <div className="flex flex-wrap -m-2">
@@ -18,6 +18,7 @@ function Services() {
               <div className="flex-grow">
                 <h2 className="text-gray-900 title-font font-medium">Zirve Ticari</h2>
                 <p className="text-gray-500">Zirve Ticari ile Ön Muhasebe süreçlerinizi pratik ve hızlı bir şekilde yönetin.</p>
+                <Link to='/urundetay' className='text-black hover:text-blue-500'><p>Daha Fazla...</p></Link>
               </div>
             </div>
           </div>
@@ -27,6 +28,7 @@ function Services() {
               <div className="flex-grow">
                 <h2 className="text-gray-900 title-font font-medium">Zirve Üretim</h2>
                 <p className="text-gray-500">Firmanızın tüm üretim sürecini ticari ve genel muhasebe bölümüyle entegre yönetin.</p>
+                <Link to='/urundetay' className='text-black hover:text-blue-500'><p>Daha Fazla...</p></Link>
               </div>
             </div>
           </div>
@@ -36,6 +38,7 @@ function Services() {
               <div className="flex-grow">
                 <h2 className="text-gray-900 title-font font-medium">Zirve Finansman</h2>
                 <p className="text-gray-500">Zirve Finansman ile genel muhasebe ve ön muhasebe süreçlerinizi birlikte yönetin.</p>
+                <Link to='/urundetay' className='text-black hover:text-blue-500'><p>Daha Fazla...</p></Link>
               </div>
             </div>
           </div>
@@ -45,6 +48,7 @@ function Services() {
               <div className="flex-grow">
                 <h2 className="text-gray-900 title-font font-medium">Zirve Muhasebe</h2>
                 <p className="text-gray-500">Genel Muhasebe kayıtlarınızı hem pratik, hem de detaylı olarak takip edin.</p>
+                <Link to='/urundetay' className='text-black hover:text-blue-500'><p>Daha Fazla...</p></Link>
               </div>
             </div>
           </div>
@@ -54,6 +58,7 @@ function Services() {
               <div className="flex-grow">
                 <h2 className="text-gray-900 title-font font-medium">Zirve Bordro</h2>
                 <p className="text-gray-500">Zirve Bordro ile çalışanlarınızın bordro / personel kayıtlarını, işe giriş çıkış ve bildirge süreçlerini yönetmek çok pratik.</p>
+                <Link to='/urundetay' className='text-black hover:text-blue-500'><p>Daha Fazla...</p></Link>
               </div>
             </div>
           </div>
@@ -64,6 +69,7 @@ function Services() {
               <img alt="team" className="w-16 h-16 mr-4" src="https://websiteapi.zirveyazilim.net/uploads/zirve_e-irsaliye_51ce365535.svg" />
               <div className="flex-grow">
                 <p className="text-gray-500">Zirve Ticari, Finansman ve Portal ile e-Fatura, e-Arşiv, e-İrsaliye faturalarınızı son kullanıcılara kolayca gönderin.</p>
+                <Link to='/urundetay' className='text-black hover:text-blue-500'><p>Daha Fazla...</p></Link>
               </div>
             </div>
           </div>
@@ -73,6 +79,7 @@ function Services() {
               <div className="flex-grow">
                 <h2 className="text-gray-900 title-font font-medium">e-SMM</h2>
                 <p className="text-gray-500">Serbest meslek makbuzlarınızı dijital ortamda kolayca yönetin, tahsilatlarınızı hızlandırın.</p>
+                <Link to='/urundetay' className='text-black hover:text-blue-500'><p>Daha Fazla...</p></Link>
               </div>
             </div>
           </div>
@@ -82,6 +89,7 @@ function Services() {
               <div className="flex-grow">
                 <h2 className="text-gray-900 title-font font-medium">e-Müstahsil</h2>
                 <p className="text-gray-500">Müstahsil makbuzlarınızı Zirve ile elektronik ortamda hızlıca oluşturun ve raporlayın</p>
+                <Link to='/urundetay' className='text-black hover:text-blue-500'><p>Daha Fazla...</p></Link>
               </div>
             </div>
           </div>

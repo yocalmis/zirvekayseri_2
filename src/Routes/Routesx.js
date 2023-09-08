@@ -7,6 +7,7 @@ import Zirveurunleri from "../pages/Hizmetler/Zirveurunleri/Zirveurunleri";
 import Eimza from "../pages/Eimza/Eimza";
 import Iletisim from "../pages/Iletisim/Iletisim";
 import Kampanyadetay1 from "../pages/KampanyaDetay/CampanyDetails";
+import UrunDetay from "../pages/UrunDetay/Urundetay";
 
 const Routesx = [
   {
@@ -44,6 +45,10 @@ const Routesx = [
   {
     path: "/kampanya-detay",
     element: <Kampanyadetay1 />,
+  },
+  {
+    path: "/urundetay",
+    element: <UrunDetay />,
   },
 ];
 
