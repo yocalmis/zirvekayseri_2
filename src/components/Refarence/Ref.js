@@ -19,8 +19,8 @@ const Ref = observer(() => {
       <div className="h-1 bg-gray-200 rounded overflow-hidden mb-8">
               <div className="w-100 h-full bg-blue-500"></div>
             </div>
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="mb-6 md:mb-0">
+        <div className="grid md:grid-cols-3 sm:text-center">
+          <div className="mb-6 md:mb-0 sm:mr-auto ">
             <h2 className="text-3xl font-bold mb-6">
               Yüzlerce Güler Yüzlü Müşteri 2,000,000+ <br />
               <u className="">Referanslarımız</u>
@@ -34,18 +34,18 @@ const Ref = observer(() => {
           {Data.referans &&
                 Data.referans.map((r1, i) => (
           <div className="mb-6 md:mb-0">
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid" style={{}}>
               <div className="">
       
 		
 				
-		<img 
+		<img className=""
                   // src={require(`/assets/uploads/files/${r1.resim}`).default}  DOSYA YOLUNU KABUL ETMİYOR 	
      src={"https://www.zirvekayseri.com/assets/uploads/files/"+r1.resim}				  
-				className="grayscale px-6"
+				className="grayscale px-6 ml-20"
                   alt="Nasa - log"
                 />			
-				<div>{r1.firma}</div>
+				<div className="m-4">{r1.firma}</div>
 			
               </div>
             </div>

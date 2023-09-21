@@ -90,7 +90,7 @@ fetch("https://www.zirvekayseri.com/api/bilgial", requestOptions)
           marginHeight="0"
           marginWidth="0"
           scrolling="no"
-          src={c1.maps} //* BURASI KONTROL EDİLECEK PANELDEKİ İLE AYNI OLACAK https://maps.google.com/maps?width=100%&height=600&hl=en&q=Kayseri%20Zirve%20Kayseri&ie=UTF8&t=&z=14&iwloc=B&output=embed Bunun ile calışıyor. **/ 
+          src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=Kayseri%20Zirve%20Kayseri&ie=UTF8&t=&z=14&iwloc=B&output=embed" //* BURASI KONTROL EDİLECEK PANELDEKİ İLE AYNI OLACAK https://maps.google.com/maps?width=100%&height=600&hl=en&q=Kayseri%20Zirve%20Kayseri&ie=UTF8&t=&z=14&iwloc=B&output=embed Bunun ile calışıyor. **/ 
           style={{ filter: 'grayscale(1) contrast(1.2) opacity(0.4)' }}
         ></iframe>))}
       </div>
