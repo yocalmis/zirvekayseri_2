@@ -25,10 +25,12 @@ class Store {
   users = [];
   bilgi = [];
   kampanya = [];
+  kampanyaDetay = [];
   etkinlik = [];
   referans = [];
   personel = [];
-
+   urun = []; 
+   page = [];
   constructor() {
     makeAutoObservable(this);
 
@@ -37,9 +39,21 @@ makeObservable(this, {
 count: observable,
 users: observable,
 bilgi: observable,
-kampanya,
+kampanya: observable,
+kampanyaDetay: observable,
+etkinlik: observable,
+referans: observable,
+personel: observable,
+page: observable,
+urun: observable,
 bilgiGetir: action,
 kampanyaGetir: action,
+etkinlikGetir: action,
+referansGetir: action,
+personelGetir: action,
+kampanyaDetayGetir: action,
+pageGetir: action,
+urunGetir: action,
 inc: action,
 dec: action
 })
@@ -110,6 +124,20 @@ dec: action
       console.error(err);
     }
   };
+  
+    kampanyaDetayGetir = async (sn) => {
+    const baseURL = "https://www.zirvekayseri.com/api/kampanya_getir/"+sn;
+    try {
+      const resp = await axios.get(baseURL);
+     	//  console.log(resp.data);
+
+      runInAction(() => {
+        this.kampanyaDetay = resp.data;
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   etkinlikGetir = async () => {
     const baseURL = "https://zirvekayseri.com/api/etkinlik";
@@ -152,6 +180,37 @@ dec: action
       console.error(err);
     }
   };
+  
+  
+   urunGetir = async () => {
+    const baseURL = "https://www.zirvekayseri.com/api/urun";
+    try {
+      const resp = await axios.get(baseURL);
+      //	  console.log(resp.data);
+
+      runInAction(() => {
+        this.urun = resp.data;
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }; 
+  
+ 
+     pageGetir = async () => {
+    const baseURL = "https://www.zirvekayseri.com/api/sayfa";
+    try {
+      const resp = await axios.get(baseURL);
+      //	  console.log(resp.data);
+
+      runInAction(() => {
+        this.page = resp.data;
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  
 }
 
 export default Store;

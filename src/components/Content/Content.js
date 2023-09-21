@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { observer } from "mobx-react-lite";
+import axios from "axios";
 import Store from "../../pages/Anasayfa/Store";
 const Data = new Store();
 
@@ -13,26 +14,69 @@ const Content = observer(() => {
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
-
-  const handleSubmit = (e) => {
+  const [durum, setDurum] = useState('');
+  
+ let handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Here you can handle the form submission, for example, sending the data to a server or logging it.
-    // You can access the form data using the state variables (name, serviceType, email, subject, and message).
-    // For demonstration purposes, let's log the data to the console.
-    console.log('İsim:', name);
-    console.log('Hizmetler:', serviceType);
-    console.log('Mail Adresi:', email);
-    console.log('Konu:', subject);
-    console.log('Mesaj:', message);
-
-    // Clear form fields after submission
+	
+	
     setName('');
     setServiceType('');
     setEmail('');
     setSubject('');
     setMessage('');
-  };
+	
+	
+		console.log('İsim:', name);
+    console.log('Hizmetler:', serviceType);
+    console.log('Mail Adresi:', email);
+    console.log('Konu:', subject);
+    console.log('Mesaj:', message);	
+	
+	
+const dt= {name:name , email:email , konu:subject , mesaj:message , tur:serviceType}
+const ur="https://www.zirvekayseri.com/api/bilgial";
+
+var myHeaders = new Headers();
+myHeaders.append("Cookie", "ci_session=a%3A5%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%225a15f39f3c066bb97ea997a27f691f68%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A12%3A%2254.86.50.139%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A21%3A%22PostmanRuntime%2F7.32.3%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1694503711%3Bs%3A9%3A%22user_data%22%3Bs%3A0%3A%22%22%3B%7D30beadf20d69080f837fa85623e78e38");
+
+var formdata = new FormData();
+formdata.append("name", name);
+formdata.append("email", email);
+formdata.append("konu", subject);
+formdata.append("mesaj", message);
+formdata.append("tur", serviceType);
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: formdata,
+  redirect: 'follow'
+};
+
+fetch("https://www.zirvekayseri.com/api/bilgial", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+   
+    if (result === "Kayıt Başarılı") {
+      console.log(result);
+	   setDurum(true); 
+      console.log(durum);	  
+    }
+  })
+  .catch(error => {  
+     console.log('error', error);
+	   setDurum("error"); 
+      console.log(durum);
+
+  }
+ 
+  );
+
+  }; 
+  
+  
+
 
   return (
     <section className="text-gray-600 body-font relative">
@@ -113,7 +157,18 @@ const Content = observer(() => {
           </button>
           <p className="text-xs text-gray-500 mt-3">
            Zirve Kayseri @2023 Haklarınızı Saklı Tutar.
+		   
           </p>
+		  <div>
+		{
+			
+durum===true ? <p>Gönderim başarılı!</p> 
+      : durum===false ? <p>Gönderim başarısız!</p>
+      : <p></p>
+		
+		}
+		  
+		  </div>
         </div>
       </div>
     </section> 
@@ -122,3 +177,12 @@ const Content = observer(() => {
   });
 
 export default Content;
+
+
+	/*		durum ? (
+        <p>Gönderim başarılı!</p>
+      ) : (
+	  
+        <p></p>
+		)  
+	*/

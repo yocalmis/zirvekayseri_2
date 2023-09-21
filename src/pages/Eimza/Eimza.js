@@ -1,3 +1,4 @@
+import React, { useState,useEffect } from "react";
 import XTopbar from "../../components/Topbar/xTopbar";
 import ANavbar from "../../components/Navbar/aNavbar";
 import Carousel from "react-bootstrap/Carousel";
@@ -5,7 +6,13 @@ import Transition1 from "../../images/Transition/c14.png";
 import Transition2 from "../../images/Transition/c15.png";
 import Transition3 from "../../images/Transition/c16.png";
 import Footer from "../../components/Footer/Footer";
-import React, { useState } from "react";
+
+
+import { Link } from "react-router-dom";
+import parse from "html-react-parser";
+import { observer } from "mobx-react-lite";
+import Store from "../../pages/Anasayfa/Store";
+const Data = new Store();
 
 
 const plans = [
@@ -44,66 +51,24 @@ const updatedPlans = [
   },
 ];
 
-function Eimza() {
-  const [selectedOption, setSelectedOption] = useState('firstPurchase');
 
+
+
+const Eimza = observer(({ props }) => {
+  useEffect(() => {
+    Data.bilgiGetir();
+    Data.pageGetir();
+  }, []);
+
+const services = () => {
   return (
     <>
-      <XTopbar />
-      <ANavbar />
+      {Data.page &&
+        Data.page.map((bl, i) => {
+          if (bl.id == 28) {
+            return (
 
-      <Carousel fade>
-        <Carousel.Item>
-          <a href="#/" className="text-white">
-            <img
-              className="d-block w-full object-cover shadow text-white"
-              src={Transition1}
-              alt="First Slide"
-            />
-          </a>
-          <Carousel.Caption>
-            <h3>
-              <a href="#/" className="text-white">
-                E-imza
-              </a>
-            </h3>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <a href="#/" className="text-white">
-            <img
-              className="d-block w-full object-cover shadow"
-              src={Transition2}
-              alt="Second Slide"
-            />
-          </a>
-          <Carousel.Caption>
-            <h3>
-              <a href="#/" className="text-white">
-                E-imza
-              </a>
-            </h3>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <a href="#/" className="text-white">
-            <img
-              className="d-block w-full object-cover border"
-              src={Transition3}
-              alt="Third Slide"
-            />
-          </a>
-          <Carousel.Caption>
-            <h3>
-              <a href="#/" className="text-white">
-                E-imza
-              </a>
-            </h3>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
-
-      <section className="text-gray-600 body-font">
+      <section key={i} className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto flex flex-col">
           <div className="lg:w-4/6 mx-auto">
             <div className="rounded-lg h-64 overflow-hidden">
@@ -115,19 +80,93 @@ function Eimza() {
             </div>
             <div className="flex flex-col sm:flex-row mt-10">
               <div className="sm:w-3/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-                <h1>E-imza Nedir?</h1>
+                <h1>{parse(bl.header)}</h1>
                 <p className=" text-lg mb-4">
-                  Nitelikli Elektronik Sertifika'ya (NES) dayanılarak
-                  oluşturulan elektronik imza (e-İmza) güvenli elektronik
-                  imzadır. 5070 sayılı Elektronik İmza Kanunu uyarınca, "güvenli
-                  elektronik imza, elle atılan imzayla aynı hukuki sonucu
-                  doğurur".
+                  {parse(bl.content)}
+				  
                 </p>
               </div>
             </div>
           </div>
         </div>
-      </section>
+   </section>
+
+             
+            );
+          }
+          return null; // Bu bloğun dışındaki elemanları dikkate alma
+        })}
+    </>
+  );
+};
+
+   const [selectedOption, setSelectedOption] = useState('firstPurchase');
+
+  return (
+    <>
+      <XTopbar />
+      <ANavbar />
+
+      <Carousel fade>
+        <Carousel.Item>
+          <a  className="text-white">
+            <img
+              className="d-block w-full object-cover shadow text-white"
+              src={Transition1}
+              alt="First Slide"
+            />
+          </a>
+          <Carousel.Caption>
+            <h3>
+              <a  className="text-white">
+                E-imza
+              </a>
+            </h3>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <a  className="text-white">
+            <img
+              className="d-block w-full object-cover shadow"
+              src={Transition2}
+              alt="Second Slide"
+            />
+          </a>
+          <Carousel.Caption>
+            <h3>
+              <a  className="text-white">
+                E-imza
+              </a>
+            </h3>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <a  className="text-white">
+            <img
+              className="d-block w-full object-cover border"
+              src={Transition3}
+              alt="Third Slide"
+            />
+          </a>
+          <Carousel.Caption>
+            <h3>
+              <a  className="text-white">
+                E-imza
+              </a>
+            </h3>
+          </Carousel.Caption>
+        </Carousel.Item>
+      </Carousel>
+
+
+	
+	
+		  <div>
+      {services()}
+    </div>
+   
+	  
+	
 
       <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
@@ -151,53 +190,163 @@ function Eimza() {
   </div>
     <div className="flex flex-wrap -m-4">
       {selectedOption === 'firstPurchase' ? (
-        plans.map((plan, index) => (
-          <div key={index} className="p-4 xl:w-1/3 md:w-1/2 w-full">
+	  
+	Data.bilgi &&
+                Data.bilgi.map((bl, i) => (  
+  <>    
+      <div key="1" className="p-4 xl:w-1/3 md:w-1/2 w-full">
             <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
-              <h2 className="text-sm tracking-widest title-font mb-1 font-medium">{plan.title}</h2>
-              <h1 className="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">{plan.price}</h1>
-              {plan.features.map((feature, featureIndex) => (
+              <h2 className="text-sm tracking-widest title-font mb-1 font-medium">{i+1} Yıllık</h2>
+              <h1 className="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">{bl.e_imza_fiyat_1}</h1>
+              {plans.map((feature, featureIndex) => (
                 <p key={featureIndex} className="flex items-center text-gray-600 mb-2">
                   <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-blue-200 text-white rounded-full flex-shrink-0">
                     <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" className="w-3 h-3" viewBox="0 0 24 24">
                       <path d="M20 6L9 17l-5-5"></path>
                     </svg>
-                  </span>{feature}
+                  </span>{feature.features[featureIndex]}
                 </p>
               ))}
+			  <a href="/iletisim">
               <button className="flex items-center mt-auto text-white bg-blue-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-blue-600 rounded">SATIN AL!
                 <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-auto" viewBox="0 0 24 24">
                   <path d="M5 12h14M12 5l7 7-7 7"></path>
                 </svg>
-              </button>
+              </button></a>
               <p className="text-xs text-gray-500 mt-3">KDV DAHİL FİYAT!</p>
             </div>
-          </div>
-        ))
+          </div>	  
+	  
+	  
+	      <div key="2" className="p-4 xl:w-1/3 md:w-1/2 w-full">
+            <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
+              <h2 className="text-sm tracking-widest title-font mb-1 font-medium">{i+2} Yıllık</h2>
+              <h1 className="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">{bl.e_imza_fiyat_2}</h1>
+              {plans.map((feature, featureIndex) => (
+                <p key={featureIndex} className="flex items-center text-gray-600 mb-2">
+                  <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-blue-200 text-white rounded-full flex-shrink-0">
+                    <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" className="w-3 h-3" viewBox="0 0 24 24">
+                      <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                  </span>{feature.features[featureIndex]}
+                </p>
+              ))}
+			  <a href="/iletisim">
+              <button className="flex items-center mt-auto text-white bg-blue-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-blue-600 rounded">SATIN AL!
+                <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-auto" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </button></a>
+              <p className="text-xs text-gray-500 mt-3">KDV DAHİL FİYAT!</p>
+            </div>
+          </div>  
+	  
+	  
+	      <div key="3" className="p-4 xl:w-1/3 md:w-1/2 w-full">
+            <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
+              <h2 className="text-sm tracking-widest title-font mb-1 font-medium">{i+3} Yıllık</h2>
+              <h1 className="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">{bl.e_imza_fiyat_3}</h1>
+              {plans.map((feature, featureIndex) => (
+                <p key={featureIndex} className="flex items-center text-gray-600 mb-2">
+                  <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-blue-200 text-white rounded-full flex-shrink-0">
+                    <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" className="w-3 h-3" viewBox="0 0 24 24">
+                      <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                  </span>{feature.features[featureIndex]}
+                </p>
+              ))}
+			  <a href="/iletisim">
+              <button className="flex items-center mt-auto text-white bg-blue-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-blue-600 rounded">SATIN AL!
+                <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-auto" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </button></a>
+              <p className="text-xs text-gray-500 mt-3">KDV DAHİL FİYAT!</p>
+            </div>
+          </div>  
+	  </>   ))
+	  
+	  
       ) : (
-        updatedPlans.map((plan, index) => (
-          <div key={index} className="p-4 xl:w-1/3 md:w-1/2 w-full">
+   
+   
+  	Data.bilgi &&
+                Data.bilgi.map((bl, i) => (  
+  <>    
+      <div key="4" className="p-4 xl:w-1/3 md:w-1/2 w-full">
             <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
-              <h2 className="text-sm tracking-widest title-font mb-1 font-medium">{plan.title}</h2>
-              <h1 className="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">{plan.price}</h1>
-              {plan.features.map((feature, featureIndex) => (
+              <h2 className="text-sm tracking-widest title-font mb-1 font-medium">{i+1} Yıllık Yenileme</h2>
+              <h1 className="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">{bl.e_imza_yenileme_fiyat_1}</h1>
+              {plans.map((feature, featureIndex) => (
                 <p key={featureIndex} className="flex items-center text-gray-600 mb-2">
                   <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-blue-200 text-white rounded-full flex-shrink-0">
                     <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" className="w-3 h-3" viewBox="0 0 24 24">
                       <path d="M20 6L9 17l-5-5"></path>
                     </svg>
-                  </span>{feature}
+                  </span>{feature.features[featureIndex]}
                 </p>
               ))}
+			  <a href="/iletisim">
               <button className="flex items-center mt-auto text-white bg-blue-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-blue-600 rounded">SATIN AL!
                 <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-auto" viewBox="0 0 24 24">
                   <path d="M5 12h14M12 5l7 7-7 7"></path>
                 </svg>
-              </button>
+              </button></a>
               <p className="text-xs text-gray-500 mt-3">KDV DAHİL FİYAT!</p>
             </div>
-          </div>
-        ))
+          </div>	  
+	  
+	  
+	      <div key="5" className="p-4 xl:w-1/3 md:w-1/2 w-full">
+            <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
+              <h2 className="text-sm tracking-widest title-font mb-1 font-medium">{i+2} Yıllık Yenileme</h2>
+              <h1 className="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">{bl.e_imza_yenileme_fiyat_2}</h1>
+              {plans.map((feature, featureIndex) => (
+                <p key={featureIndex} className="flex items-center text-gray-600 mb-2">
+                  <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-blue-200 text-white rounded-full flex-shrink-0">
+                    <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" className="w-3 h-3" viewBox="0 0 24 24">
+                      <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                  </span>{feature.features[featureIndex]}
+                </p>
+              ))}
+			  <a href="/iletisim">
+              <button className="flex items-center mt-auto text-white bg-blue-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-blue-600 rounded">SATIN AL!
+                <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-auto" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </button></a>
+              <p className="text-xs text-gray-500 mt-3">KDV DAHİL FİYAT!</p>
+            </div>
+          </div>  
+	  
+	  
+	      <div key="6" className="p-4 xl:w-1/3 md:w-1/2 w-full">
+            <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
+              <h2 className="text-sm tracking-widest title-font mb-1 font-medium">{i+3} Yıllık Yenileme</h2>
+              <h1 className="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">{bl.e_imza_yenileme_fiyat_3}</h1>
+              {plans.map((feature, featureIndex) => (
+                <p key={featureIndex} className="flex items-center text-gray-600 mb-2">
+                  <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-blue-200 text-white rounded-full flex-shrink-0">
+                    <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" className="w-3 h-3" viewBox="0 0 24 24">
+                      <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                  </span>{feature.features[featureIndex]}
+                </p>
+              ))}
+			  <a href="/iletisim">
+              <button className="flex items-center mt-auto text-white bg-blue-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-blue-600 rounded">SATIN AL!
+                <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-auto" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </button></a>
+              <p className="text-xs text-gray-500 mt-3">KDV DAHİL FİYAT!</p>
+            </div>
+          </div>  
+	  </>   )) 
+   
+   
+   
       )}
     </div>
   </div>
@@ -384,6 +533,10 @@ function Eimza() {
       <Footer />
     </>
   );
-}
+});
 
 export default Eimza;
+
+
+
+

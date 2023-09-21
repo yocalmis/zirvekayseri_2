@@ -27,7 +27,16 @@ function TeamMember({ name, role, image, mail, phone }) {
           </h2>
           <h3 className="text-gray-500 font-medium text-lg">{role}</h3>
           <a className="mb-2 text-black" href={"tel:" + phone}>
-            {phone}
+             
+			
+{ 
+    phone === "" ? 
+      "0352 231 25 36"
+      : 
+     phone
+}
+			
+			
           </a>
           <br />
           <a className="mb-4 text-black" href={"mailto:" + mail}>
@@ -60,7 +69,7 @@ const Kurumsal = observer(() => {
       
         <Carousel fade>
           <Carousel.Item>
-            <a href="#/" className="text-white">
+            <a  className="text-white">
               <img
                 className="d-block w-full object-cover shadow text-white"
                 src={Transition1}
@@ -69,14 +78,14 @@ const Kurumsal = observer(() => {
             </a>
             <Carousel.Caption>
               <h3>
-                <a href="#/" className="text-white">
+                <a  className="text-white">
                   Hakkımızda
                 </a>
               </h3>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <a href="#/" className="text-white">
+            <a  className="text-white">
               <img
                 className="d-block w-full object-cover shadow"
                 src={Transition2}
@@ -85,14 +94,14 @@ const Kurumsal = observer(() => {
             </a>
             <Carousel.Caption>
               <h3>
-                <a href="#/" className="text-white">
+                <a  className="text-white">
                   Hakkımızda
                 </a>
               </h3>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <a href="#/" className="text-white">
+            <a  className="text-white">
               <img
                 className="d-block w-full object-cover border"
                 src={Transition3}
@@ -101,7 +110,7 @@ const Kurumsal = observer(() => {
             </a>
             <Carousel.Caption>
               <h3>
-                <a href="#/" className="text-white">
+                <a  className="text-white">
                   Hakkımızda
                 </a>
               </h3>
@@ -115,7 +124,7 @@ const Kurumsal = observer(() => {
             <h1 className="sm:text-3xl text-2xl font-medium title-font text-center text-gray-900 mb-20">Hakkımızda
             </h1>
             <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6">
-              <div className="p-4 md:w-1/2 flex">
+              <div className="p-4  flex">
                 <div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-500 mb-4 flex-shrink-0">
                   <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-6 h-6" viewBox="0 0 24 24">
                     <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
@@ -128,21 +137,7 @@ const Kurumsal = observer(() => {
                   <p className="leading-relaxed text-base">{parse(h1.hakkimizda)}</p>
                   ))} </div> 
               </div>
-              <div className="p-4 md:w-1/2 flex">
-                <div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-500 mb-4 flex-shrink-0">
-                  <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-6 h-6" viewBox="0 0 24 24">
-                    <circle cx="6" cy="6" r="3"></circle>
-                    <circle cx="6" cy="18" r="3"></circle>
-                    <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
-                  </svg>
-                </div>
-                <div className="flex-grow pl-6">
-                  <h2 className="text-gray-900 text-lg title-font font-medium mb-2">Misyonumuz :</h2>
-                  {Data.bilgi &&
-                Data.bilgi.slice(0, 1).map((h1, i) => (
-                  <p className="leading-relaxed text-base">{parse(h1.hakkimizda)}</p>
-                  ))}</div>
-              </div>
+       
             </div>
           </div>
         </section>

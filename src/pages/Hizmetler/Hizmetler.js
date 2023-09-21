@@ -15,7 +15,7 @@ function Hizmetler() {
 
       <Carousel fade>
         <Carousel.Item>
-          <a href="#/" className="text-white">
+          <a  className="text-white">
             <img
               className="d-block w-full object-cover shadow text-white"
               src={Transition1}
@@ -24,14 +24,14 @@ function Hizmetler() {
           </a>
           <Carousel.Caption>
             <h3>
-              <a href="#/" className="text-white">
+              <a  className="text-white">
                 Hakkımızda
               </a>
             </h3>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <a href="#/" className="text-white">
+          <a  className="text-white">
             <img
               className="d-block w-full object-cover shadow"
               src={Transition2}
@@ -40,14 +40,14 @@ function Hizmetler() {
           </a>
           <Carousel.Caption>
             <h3>
-              <a href="#/" className="text-white">
+              <a  className="text-white">
                 Hakkımızda
               </a>
             </h3>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <a href="#/" className="text-white">
+          <a  className="text-white">
             <img
               className="d-block w-full object-cover border"
               src={Transition3}
@@ -56,7 +56,7 @@ function Hizmetler() {
           </a>
           <Carousel.Caption>
             <h3>
-              <a href="#/" className="text-white">
+              <a  className="text-white">
                 Hakkımızda
               </a>
             </h3>

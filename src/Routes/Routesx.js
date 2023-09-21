@@ -8,6 +8,7 @@ import Eimza from "../pages/Eimza/Eimza";
 import Iletisim from "../pages/Iletisim/Iletisim";
 import Kampanyadetay1 from "../pages/KampanyaDetay/CampanyDetails";
 
+
 const Routesx = [
   {
     path: "/",

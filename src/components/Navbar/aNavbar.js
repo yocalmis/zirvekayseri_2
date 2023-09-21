@@ -52,25 +52,24 @@ const ANavbar =observer( () => {
           <img src={Logo} alt="Logo" />
         </div>
         <a href="/">Anasayfa</a>
-        <a href="/hakkimizda">Kurumsal</a>
+        <a href="/#/hakkimizda">Kurumsal</a>
         <NavDropdown title="Hizmetler" id="collasible-nav-dropdown">
-          <NavDropdown.Item href="/ozel-Yazilim" className="pt-3 text-xs">
+          <NavDropdown.Item href="/#/ozel-Yazilim" className="pt-3 text-xs">
             <h4>Özel Yazılım</h4>
             <p>Web Paketleri, Müşavir E-Destek, Kişiye ve Kuruma Özel Yazılımlar.</p>
           </NavDropdown.Item>
-          <NavDropdown.Item href="/Zirve-Urunleri" className="pt-3 text-xs">
+          <NavDropdown.Item href="/#/Zirve-Urunleri" className="pt-3 text-xs">
             <h4>Zirve Ürünleri</h4>
-            <p>Müşavir, Ticari, Finansman, Üretim , Bordro Programları</p>
+            <p>Müşavir, Ticari, Finansman, Üretim , Bordro, Nova, Paraşüt, Bizmu Programları</p>
           </NavDropdown.Item>
-          <NavDropdown.Item href="/Servis-Bakim-ve-Onarim" className="pt-3 ">
+          <NavDropdown.Item href="/#/Servis-Bakim-ve-Onarim" className="pt-3 ">
             <h4>Servis Bakım ve Onarım</h4>
             <p>Servis bakım ve onarım, Veri Kurtarma, Sunucu, Server İşlemleri.</p>
-          </NavDropdown.Item>
+          </NavDropdown.Item>	  
         </NavDropdown>
-        <a href="/e-imza">E-İmza</a>
-        <a href="/ik">Personel Temin</a>
+        <a href="/#/e-imza">E-İmza</a>
         <a href="https://blog.zirvekayseri.com/">Blog</a>
-        <a href="/iletisim">İletişim</a>
+        <a href="/#/iletisim">İletişim</a>
         <button className="nav-btn nav-close-btn" onClick={hideDropdown}>
           <FaTimes />
         </button>

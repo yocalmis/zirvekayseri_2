@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Carousel1 from "../../images/Coursel/Carousel1.png";
 import Carousel2 from "../../images/Coursel/Carousel2.png";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import parse from "html-react-parser";
 import { observer } from "mobx-react-lite";
 import Store from "../../pages/Anasayfa/Store";
@@ -11,6 +11,9 @@ const Campany = observer(({ props }) => {
   useEffect(() => {
     Data.kampanyaGetir();
   }, []);
+  
+
+
 
   return (
     <>
@@ -50,15 +53,15 @@ const Campany = observer(({ props }) => {
                         href="#/"
                         className="mt-3 inline-flex items-center bg-blue-600 hover:text-white"
                       >
-                        <Link
-                          to={{
-                            pathname: "/kampanyaDetay",
-                            state: { seo_name: bl.seo_name },
-                          }}
-                        >
-                          Daha fazla bilgi edin
-                        </Link>
-
+					  
+         <div>  <Link to="/kampanya-detay" state={{
+			 seo_name: bl.seo_name
+			 }}>
+          Daha fazla bilgi edin
+        </Link>
+      </div>
+ 			  
+  
                         <svg
                           fill="none"
                           stroke="currentColor"
@@ -96,14 +99,11 @@ const Campany = observer(({ props }) => {
                             href="#/"
                             className="mt-3 text-wihte inline-flex items-center bg-blue-600  hover:text-white"
                           >
-                            <Link
-                              to={{
-                                pathname: "/kampanyaDetay",
-                                state: { seo_name: bl.seo_name },
-                              }}
-                            >
-                              Daha fazla bilgi edin
-                            </Link>
+                            <Link to="/kampanya-detay" state={{
+			 seo_name: bl.seo_name
+			 }}>
+          Daha fazla bilgi edin
+        </Link>
                             <svg
                               fill="none"
                               stroke="currentColor"

@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link,useLocation  } from "react-router-dom";
 import XTopbar from "../../components/Topbar/xTopbar";
 import ANavbar from "../../components/Navbar/aNavbar";
 import Carousel from "react-bootstrap/Carousel";
@@ -8,9 +8,26 @@ import Transition2 from "../../images/Transition/c15.png";
 import Transition3 from "../../images/Transition/c16.png";
 import Footer from "../../components/Footer/Footer";
 
-function CampanyDetails() {
-  const features = [
-    /* Kampanya ilk giriş 3 lü icon ve yazıları */
+import parse from "html-react-parser";
+import { observer } from "mobx-react-lite";
+import Store from "../../pages/Anasayfa/Store";
+const Data = new Store();
+
+const CampanyDetails = observer(({ props }) => {
+
+  
+  
+  const location = useLocation();
+  const propsData = location.state;
+  
+   useEffect(() => {
+    Data.kampanyaDetayGetir(propsData.seo_name);
+  }, []);
+  
+
+  /*
+ const features = [
+
     {
       icon: (
         <svg
@@ -63,13 +80,13 @@ function CampanyDetails() {
           <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
           <circle cx="12" cy="7" r="4"></circle>
         </svg>
-      ),
+      ),  
       title: "Kampanya Detay",
       description:
         "Mavi şişe haç vinil post-ironik dört dolarlık tost vegan tahnitçilik. Gastropub indxgo meyve suyu poutine, ramps microdosing banh mi pug VHS try-hard ugh izlanda kickstarter tumblr live-edge tilde.",
     },
   ];
-
+*/
   return (
     <>
       <XTopbar />
@@ -77,7 +94,7 @@ function CampanyDetails() {
 
       <Carousel fade>
         <Carousel.Item>
-          <Link href="#/" className="text-white">
+          <Link  className="text-white">
             <img
               className="d-block w-full object-cover shadow text-white"
               src={Transition1}
@@ -86,14 +103,14 @@ function CampanyDetails() {
           </Link>
           <Carousel.Caption>
             <h3>
-              <Link href="#/" className="text-white">
-                E-imza
+              <Link  className="text-white">
+                Kampanya Detay 
               </Link>
             </h3>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <Link href="#/" className="text-white">
+          <Link  className="text-white">
             <img
               className="d-block w-full object-cover shadow"
               src={Transition2}
@@ -102,14 +119,14 @@ function CampanyDetails() {
           </Link>
           <Carousel.Caption>
             <h3>
-              <Link href="#/" className="text-white">
-                E-imza
+              <Link  className="text-white">
+           Kampanya Detay 
               </Link>
             </h3>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <Link href="#/" className="text-white">
+          <Link  className="text-white">
             <img
               className="d-block w-full object-cover border"
               src={Transition3}
@@ -118,15 +135,102 @@ function CampanyDetails() {
           </Link>
           <Carousel.Caption>
             <h3>
-              <Link href="#/" className="text-white">
-                E-imza
+              <Link  className="text-white">
+              Kampanya Detay 
               </Link>
             </h3>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
 
+   
+    {Data.kampanyaDetay &&
+                  Data.kampanyaDetay.map((bl, i) => (
       <section className="text-gray-600 body-font">
+        <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+          <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
+              {bl.header} :
+              <br className="hidden lg:inline-block" />
+            </h1>
+            <p className="mb-8 leading-relaxed">
+              {parse(bl.manset)}
+            </p>
+			
+			
+            <div className="flex justify-center">
+			
+              <button className="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">
+                <a
+                  href="tel:+903522312536"
+                  className="text-black hover:text-blue-600"
+                >
+                  TELEFON : +90 (352) 231 25 36
+ 
+                </a>
+              </button>
+
+            </div>
+					
+			    <div className="flex justify-center">
+
+              <button className="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">
+             
+                  KAMPANYA BİTİŞ TARİHİ: {bl.date} 
+ 
+            
+              </button>
+
+            </div>
+	
+			
+          </div>
+          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+            <img
+              className="object-cover object-center rounded"
+              alt="hero"
+              src={"https://www.zirvekayseri.com/assets/uploads/files/"+bl.img}
+            />
+          </div>
+		  
+		
+        </div>
+      </section>
+	  
+	 
+	  
+	 
+	 
+	  
+	  
+   ))}  
+   
+    {Data.kampanyaDetay &&
+                  Data.kampanyaDetay.map((bl, i) => (   
+ <section className="text-gray-600 body-font">
+        <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+        
+	      <p className="mb-8 leading-relaxed">
+           {parse(bl.content)}
+            </p> 
+			 </div>
+	  </section>  
+   
+     ))} 
+   
+      <Footer />
+    </>
+ 
+
+  );
+});
+
+export default CampanyDetails;
+
+
+
+/*
+   <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
           <h1 className="sm:text-3xl text-2xl font-medium title-font text-center text-gray-900 mb-20">
             Meslege ilk Adım Kampanyası!
@@ -198,7 +302,7 @@ function CampanyDetails() {
                   </p>
                 </div>
               </div>
-              {/* ... BAŞLIK 2 ... */}
+            
               <div className="flex relative pb-12">
                 <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
                   <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
@@ -226,7 +330,7 @@ function CampanyDetails() {
                   </p>
                 </div>
               </div>
-              {/* ... BAŞLIK 3 ... */}
+          
               <div className="flex relative pb-12">
                 <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
                   <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
@@ -254,7 +358,7 @@ function CampanyDetails() {
                   </p>
                 </div>
               </div>
-              {/* ... BAŞLIK 4 ... */}
+           
               <div className="flex relative pb-12">
                 <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
                   <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
@@ -282,7 +386,7 @@ function CampanyDetails() {
                   </p>
                 </div>
               </div>
-              {/* ... BİTİŞ ... */}
+           
               <div className="flex relative">
                 <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 inline-flex items-center justify-center text-white relative z-10">
                   <svg
@@ -318,42 +422,5 @@ function CampanyDetails() {
         </div>
       </section>
 
-      <section className="text-gray-600 body-font">
-        <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-          <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
-              YENİLEME BAŞVURUSU :
-              <br className="hidden lg:inline-block" />
-            </h1>
-            <p className="mb-8 leading-relaxed">
-              Yenileme başvurusu en erken mevcut e-İmza sertifikasının süre
-              sonuna 30 gün kala yapılabilir. Sertifika süresi sona eren
-              e-imzalar ile yenileme başvurusu yapılamaz.
-            </p>
-            <div className="flex justify-center">
-              <button className="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">
-                <a
-                  href="tel:+903522312536"
-                  className="text-black hover:text-blue-600"
-                >
-                  TELEFON : +90 (352) 231 25 36
-                </a>
-              </button>
-            </div>
-          </div>
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img
-              className="object-cover object-center rounded"
-              alt="hero"
-              src="https://dummyimage.com/720x600"
-            />
-          </div>
-        </div>
-      </section>
+*/
 
-      <Footer />
-    </>
-  );
-}
-
-export default CampanyDetails;

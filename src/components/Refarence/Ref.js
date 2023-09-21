@@ -2,12 +2,15 @@ import React, { useEffect } from 'react';
 import { observer } from "mobx-react-lite";
 import Store from "../../pages/Anasayfa/Store";
 import parse from "html-react-parser";
+import Carousel1 from "../../images/Coursel/Carousel1.png";
 const Data = new Store();
 
 const Ref = observer(() => {
   useEffect(() => {
     Data.referansGetir();
   }, []);
+
+
 
   return (
     <>
@@ -29,15 +32,21 @@ const Ref = observer(() => {
             </p>              ))}
           </div>
           {Data.referans &&
-                Data.referans.slice(0, 3).map((r1, i) => (
+                Data.referans.map((r1, i) => (
           <div className="mb-6 md:mb-0">
             <div className="grid grid-cols-2 gap-6">
-              <div className="mb-12">
-                <img
-                  //* src={require(`/assets/uploads/files/${r1.resim}`).default}  DOSYA YOLUNU KABUL ETMİYOR **/ 
-                  className="grayscale px-6"
-                  alt="Nasa - logo"
-                />
+              <div className="">
+      
+		
+				
+		<img 
+                  // src={require(`/assets/uploads/files/${r1.resim}`).default}  DOSYA YOLUNU KABUL ETMİYOR 	
+     src={"https://www.zirvekayseri.com/assets/uploads/files/"+r1.resim}				  
+				className="grayscale px-6"
+                  alt="Nasa - log"
+                />			
+				<div>{r1.firma}</div>
+			
               </div>
             </div>
           </div>
@@ -50,3 +59,21 @@ const Ref = observer(() => {
 });
 
 export default Ref
+
+
+   /*      <img
+                  // src={require(`/assets/uploads/files/${r1.resim}`).default}  DOSYA YOLUNU KABUL ETMİYOR 	
+     src={Carousel1}				  
+				className="grayscale px-6"
+                  alt="Nasa - log"
+                />
+				
+				
+				  const myStyle={
+    backgroundImage:"url(" +
+"https://i.pinimg.com/474x/62/69/be/6269be179ab7d610b2a4959387fd77af.jpg"+")",
+    width:'100%',
+    height:'200px',
+    };
+	
+	*/

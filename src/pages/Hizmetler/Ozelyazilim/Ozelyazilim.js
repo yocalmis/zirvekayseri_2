@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import XTopbar from "../../../components/Topbar/xTopbar";
 import ANavbar from "../../../components/Navbar/aNavbar";
 import Carousel from "react-bootstrap/Carousel";
@@ -6,9 +6,82 @@ import Transition1 from "../../../images/Transition/c14.png";
 import Transition2 from "../../../images/Transition/c15.png";
 import Transition3 from "../../../images/Transition/c16.png";
 import Footer from "../../../components/Footer/Footer";
-import { Link } from "react-router-dom"; // Link bileşenini ekledik
 
-function ozelyazilim() {
+import { Link } from "react-router-dom";
+import parse from "html-react-parser";
+import { observer } from "mobx-react-lite";
+import Store from "../../../pages/Anasayfa/Store";
+const Data = new Store();
+
+const ozelyazilim = observer(({ props }) => {
+  useEffect(() => {
+    Data.pageGetir();
+  }, []);
+  
+  
+ const services = () => {
+  return (
+    <>
+      {Data.page &&
+        Data.page.map((bl, i) => {
+          if (bl.id == 15 || bl.id == 17 || bl.id == 18) {
+            return (
+              <section key={i} className="text-gray-600 body-font">
+                <div className="container px-5 py-24 mx-auto flex flex-col">
+                  <div className="lg:w-4/6 mx-auto">
+                    <div className="rounded-lg h-64 overflow-hidden">
+                      <img
+                        alt="content"
+                        className="object-cover object-center h-full w-full"
+                        src="https://dummyimage.com/1200x500"
+                      />
+                    </div>
+                    <div className="flex flex-col sm:flex-row mt-10">
+                      <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
+                        <div className="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            className="w-10 h-10"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                          </svg>
+                        </div>
+                        <div className="flex flex-col items-center text-center justify-center">
+                          <h2 className="font-medium title-font mt-4 text-gray-900 text-lg">
+						  {bl.p_name}
+                          </h2>
+                          <div className="w-12 h-1 bg-blue-500 rounded mt-2 mb-4"></div>
+                          <p className="text-base">
+                            {parse(bl.header)}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
+                        <p className="leading-relaxed text-lg mb-4">
+                          {parse(bl.content)}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            );
+          }
+          return null; // Bu bloğun dışındaki elemanları dikkate alma
+        })}
+    </>
+  );
+};
+
+  
+  
+
   return (
     <>
       <XTopbar />
@@ -16,7 +89,7 @@ function ozelyazilim() {
 
       <Carousel fade>
         <Carousel.Item>
-          <Link to="/" className="text-white">
+          <Link  className="text-white">
             {" "}
             {/* Link bileşeni kullanıldı */}
             <img
@@ -27,7 +100,7 @@ function ozelyazilim() {
           </Link>
           <Carousel.Caption>
             <h3>
-              <Link to="/" className="text-white">
+              <Link  className="text-white">
                 {" "}
                 {/* Link bileşeni kullanıldı */}
                 Özel Yazılım
@@ -36,7 +109,7 @@ function ozelyazilim() {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <Link to="/" className="text-white">
+          <Link  className="text-white">
             {" "}
             {/* Link bileşeni kullanıldı */}
             <img
@@ -47,7 +120,7 @@ function ozelyazilim() {
           </Link>
           <Carousel.Caption>
             <h3>
-              <Link to="/" className="text-white">
+              <Link  className="text-white">
                 {" "}
                 {/* Link bileşeni kullanıldı */}
                 Özel Yazılım
@@ -56,7 +129,7 @@ function ozelyazilim() {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <Link to="/" className="text-white">
+          <Link  className="text-white">
             {" "}
             {/* Link bileşeni kullanıldı */}
             <img
@@ -67,7 +140,7 @@ function ozelyazilim() {
           </Link>
           <Carousel.Caption>
             <h3>
-              <Link to="/" className="text-white">
+              <Link  className="text-white">
                 {" "}
                 {/* Link bileşeni kullanıldı */}
                 Özel Yazılım
@@ -77,8 +150,26 @@ function ozelyazilim() {
         </Carousel.Item>
       </Carousel>
 
-      <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto flex flex-col">
+ 
+<div>
+      {services()}
+    </div>
+
+      <br />
+      <Footer />
+    </>
+  );
+});
+
+export default ozelyazilim;
+
+
+
+
+  /*  
+
+<section className="text-gray-600 body-font">
+<div className="container px-5 py-24 mx-auto flex flex-col">
           <div className="lg:w-4/6 mx-auto">
             <div className="rounded-lg h-64 overflow-hidden">
               <img
@@ -86,6 +177,7 @@ function ozelyazilim() {
                 className="object-cover object-center h-full w-full"
                 src="https://dummyimage.com/1200x500"
               />
+
             </div>
             <div className="flex flex-col sm:flex-row mt-10">
               <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
@@ -105,8 +197,7 @@ function ozelyazilim() {
                 </div>
                 <div className="flex flex-col items-center text-center justify-center">
                   <h2 className="font-medium title-font mt-4 text-gray-900 text-lg">
-                    MÜŞAVIR E-DESTEK <br /> FIRMA WEB PAKETLERI <br /> ÖZEL
-                    YAZILIM{" "}
+                    MÜŞAVIR E-DESTEK 
                   </h2>
                   <div className="w-12 h-1 bg-blue-500 rounded mt-2 mb-4"></div>
                   <p className="text-base">
@@ -128,10 +219,13 @@ function ozelyazilim() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </div>  
+        </section>
 
-      <section className="text-gray-600 body-font">
+
+
+
+  <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
           <div className="text-center mb-20">
             <h1 className="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
@@ -143,7 +237,7 @@ function ozelyazilim() {
             </p>
           </div>
           <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
-            {/* Feature 1 */}
+          
             <div className="p-2 sm:w-1/2 w-full">
               <div className="bg-gray-100 rounded flex p-4 h-full items-center">
                 <svg
@@ -163,7 +257,7 @@ function ozelyazilim() {
                 </span>
               </div>
             </div>
-            {/* Feature 2 */}
+   
             <div className="p-2 sm:w-1/2 w-full">
               <div className="bg-gray-100 rounded flex p-4 h-full items-center">
                 <svg
@@ -183,7 +277,7 @@ function ozelyazilim() {
                 </span>
               </div>
             </div>
-            {/* Feature 3 */}
+
             <div className="p-2 sm:w-1/2 w-full">
               <div className="bg-gray-100 rounded flex p-4 h-full items-center">
                 <svg
@@ -203,7 +297,7 @@ function ozelyazilim() {
                 </span>
               </div>
             </div>
-            {/* Feature 4 */}
+       
             <div className="p-2 sm:w-1/2 w-full">
               <div className="bg-gray-100 rounded flex p-4 h-full items-center">
                 <svg
@@ -223,7 +317,7 @@ function ozelyazilim() {
                 </span>
               </div>
             </div>
-            {/* Feature 5 */}
+     
             <div className="p-2 sm:w-1/2 w-full">
               <div className="bg-gray-100 rounded flex p-4 h-full items-center">
                 <svg
@@ -243,7 +337,7 @@ function ozelyazilim() {
                 </span>
               </div>
             </div>
-            {/* Feature 6 */}
+    
             <div className="p-2 sm:w-1/2 w-full">
               <div className="bg-gray-100 rounded flex p-4 h-full items-center">
                 <svg
@@ -270,6 +364,7 @@ function ozelyazilim() {
           </button>
         </div>
       </section>
+	
 
       <section className="text-gray-600 body-font">
         <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
@@ -355,11 +450,9 @@ function ozelyazilim() {
           </div>
         </div>
       </section>
+  */
 
-      <br />
-      <Footer />
-    </>
-  );
-}
 
-export default ozelyazilim;
+
+
+
